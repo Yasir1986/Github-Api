@@ -12,4 +12,4 @@ Enjoy
 
 Or
 
-Live deploy Link:
+Live deploy Link: https://cranky-brown-31aa3b.netlify.app/
