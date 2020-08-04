@@ -9,7 +9,6 @@ const ACTIONS = {
 }
 
 const BASE_URL = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json'
-//const BASE_URL_NoCros = 'https://jobs.github.com/positions.json'
 
 function reducer(state, action) {
   switch (action.type) {
@@ -34,7 +33,7 @@ export default function useFetchJobs(params, page) {
     dispatch({ type: ACTIONS.MAKE_REQUEST })
     axios.get(BASE_URL, {
       cancelToken: cancelToken1.token,
-      params: { markdown: true, page: page, ...params, limit: 10 }
+      params: { markdown: true, page: page, ...params }
     }).then(res => {
       dispatch({ type: ACTIONS.GET_DATA, payload: { jobs: res.data } }) 
     }).catch(e => {
@@ -45,7 +44,7 @@ export default function useFetchJobs(params, page) {
     const cancelToken2 = axios.CancelToken.source()
     axios.get(BASE_URL, {
       cancelToken: cancelToken2.token,
-      params: { markdown: true, page: page + 1, ...params, limit: 10 }
+      params: { markdown: true, page: page + 1, ...params }
     }).then(res => {
       dispatch({ type: ACTIONS.UPDATE_HAS_NEXT_PAGE, payload: { hasNextPage: res.data.length !== 0 } }) 
     }).catch(e => {
